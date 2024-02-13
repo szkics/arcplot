@@ -1,21 +1,3 @@
-# arcplot
-
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/downloads/release)
-
-## description
-
-arcplot is a library built on top of matplotlib for seamless creation of arc diagrams.
-
-## installation
-
-```bash
-pip install arcplot
-```
-
-## usage
-
-```py
 from arcplot import ArcDiagram
 
 nodes = ["The Good", "The Bad", "The Ugly"]
@@ -26,12 +8,7 @@ arc_diagram.connect("The Good", "The Bad")
 arc_diagram.connect("The Good", "The Ugly")
 arc_diagram.connect("The Ugly", "The Bad")
 arc_diagram.save_plot_as("the-good.png")
-```
 
-![alt text](the-good.png)
-
-
-```py
 nodes = [
     "Angela",
     "Pam",
@@ -61,6 +38,3 @@ arc_diagram.connect("Kelly", "Darrel")
 arc_diagram.connect("Angela", "Dwight")
 arc_diagram.connect("Angela", "Andy")
 arc_diagram.save_plot_as("the-office.png")
-```
-
-![alt text](the-office.png)
