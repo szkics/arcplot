@@ -3,15 +3,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/szkics/arcplot/blob/main/LICENSE)
 [![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/downloads/release)
 
-## description
-
 arcplot is a library based on matplotlib for seamless creation of arc diagrams.
-
-## installation
-
-```bash
-pip install arcplot
-```
 
 ## usage
 
@@ -28,7 +20,7 @@ arc_diagram.connect("The Ugly", "The Bad")
 arc_diagram.show_plot()
 ```
 
-![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/the-good.png?token=GHSAT0AAAAAACNTK4WQEJFYRRX5PBP4ACGSZOML5DA)
+![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/the-good.png?token=GHSAT0AAAAAACNTK4WQAFBU5WC324BUT3SMZOMMLZQ)
 
 
 ```py
@@ -63,7 +55,7 @@ arc_diagram.connect("Angela", "Andy")
 arc_diagram.save_plot_as("the-office.png", resolution="300") # resolution is optional, defaults to 'figure'
 ```
 
-![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/the-office.png?token=GHSAT0AAAAAACNTK4WR6WUUER7EHM2ZAKICZOMMA7Q)
+![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/the-office.png?token=GHSAT0AAAAAACNTK4WRC5YHOB45DMKKFHTCZOMML2A)
 
 ## function list
 
@@ -74,4 +66,10 @@ ArcDiagram(nodes, title) # for initializing an ArcDiagram the entities to connec
 .connect(start, end) # for creating an arc between two entities.
 .show_plot() # for checking the results of the data visualization process.
 .save_plot_as(file_name, resolution="100") # for saving file as an image with an optional resolution setting for higher-quality images.
+```
+
+## installation
+
+```bash
+pip install arcplot
 ```
