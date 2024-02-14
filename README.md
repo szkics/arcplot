@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/szkics/arcplot/blob/main/LICENSE)
 [![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/downloads/release)
 
-arcplot is a library based on matplotlib for seamless creation of arc diagrams.
+[arcplot](https://pypi.org/project/arcplot/) is a library based on matplotlib for seamless creation of arc diagrams.
 
 ## usage
 
