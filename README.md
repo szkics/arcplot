@@ -1,11 +1,11 @@
 # arcplot
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/szkics/arcplot/blob/main/LICENSE)
 [![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/downloads/release)
 
 ## description
 
-arcplot is a library built on top of matplotlib for seamless creation of arc diagrams.
+arcplot is a library based on matplotlib for seamless creation of arc diagrams.
 
 ## installation
 
@@ -25,10 +25,10 @@ arc_diagram.set_background_color("#c7a27d")
 arc_diagram.connect("The Good", "The Bad")
 arc_diagram.connect("The Good", "The Ugly")
 arc_diagram.connect("The Ugly", "The Bad")
-arc_diagram.save_plot_as("the-good.png")
+arc_diagram.show_plot()
 ```
 
-![alt text](the-good.png)
+![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/the-good.png?token=GHSAT0AAAAAACNTK4WQEJFYRRX5PBP4ACGSZOML5DA)
 
 
 ```py
@@ -60,7 +60,18 @@ arc_diagram.connect("Kelly", "Ryan")
 arc_diagram.connect("Kelly", "Darrel")
 arc_diagram.connect("Angela", "Dwight")
 arc_diagram.connect("Angela", "Andy")
-arc_diagram.save_plot_as("the-office.png")
+arc_diagram.save_plot_as("the-office.png", resolution="300") # resolution is optional, defaults to 'figure'
 ```
 
-![alt text](the-office.png)
+![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/the-office.png?token=GHSAT0AAAAAACNTK4WR6WUUER7EHM2ZAKICZOMMA7Q)
+
+## function list
+
+```py
+ArcDiagram(nodes, title) # for initializing an ArcDiagram the entities to connect and the title is required.
+.set_background_color(string) # for setting background color of the matplotlib figure.
+.set_color_map(string) # for setting color map, choose from: https://matplotlib.org/stable/users/explain/colors/colormaps.html
+.connect(start, end) # for creating an arc between two entities.
+.show_plot() # for checking the results of the data visualization process.
+.save_plot_as(file_name, resolution="100") # for saving file as an image with an optional resolution setting for higher-quality images.
+```
