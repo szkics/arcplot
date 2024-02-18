@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "arcplot"
-version = "0.1.1"
+version = "0.1.2"
 description = "arcplot is a library based on matplotlib for seamless creation of arc diagrams."
 authors = ["Csaba Szallós Kis"]
 license = "MIT"

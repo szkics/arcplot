@@ -7,7 +7,7 @@
 
 ## usage
 
-![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/italian-railway.png)
+![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/italian-railway-connections.png)
 
 ```py
 from arcplot import ArcDiagram
