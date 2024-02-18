@@ -13,7 +13,7 @@ class ArcDiagram:
         self.colors = plt.cm.copper(np.linspace(0, 1, len(nodes)))
         self.background_color = "white"
 
-    def connect(self, start_node, end_node, thickness=0.1, arc_position="above"):
+    def connect(self, start_node, end_node, linewidth=0.1, arc_position="above"):
         start = self.nodes.index(start_node)
         end = self.nodes.index(end_node)
 
@@ -27,7 +27,7 @@ class ArcDiagram:
 
         x = arc_center + radius * np.cos(np.radians(theta))
         y = radius * np.sin(np.radians(theta))
-        self.arc_coordinates.append((x, y, start, thickness))
+        self.arc_coordinates.append((x, y, start, linewidth))
 
     def save_plot_as(self, file_name, resolution="figure"):
         fig, ax = self.__plot()
@@ -59,13 +59,13 @@ class ArcDiagram:
 
         max_value = max(self.arc_coordinates, key=itemgetter(3))[3]
         # plot connections as arcs
-        for x, y, index, thickness in self.arc_coordinates:
+        for x, y, index, raw_linewidth in self.arc_coordinates:
             ax.plot(
                 x,
                 y,
                 color=self.colors[index],
                 zorder=1,
-                linewidth=self._map_to_linewidth(thickness, max_value),
+                linewidth=self._map_to_linewidth(raw_linewidth, max_value),
             )
 
         plt.xticks(rotation=45)

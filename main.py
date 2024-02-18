@@ -56,7 +56,7 @@ nodes = [
     "Turin",
     "Genoa",
 ]
-title = "Railway connection between Italian cities"
+title = "Railway connections between Italian cities"
 arc_diagram = ArcDiagram(nodes, title)
 custom_colors = [
     "#386641",
@@ -73,23 +73,25 @@ custom_colors = [
     "#a98467",
 ]
 arc_diagram.set_custom_colors(custom_colors)
-arc_diagram.set_background_color("black")
-arc_diagram.connect("Milan", "Genoa", thickness=119)
-arc_diagram.connect("Milan", "Verona", thickness=140)
-arc_diagram.connect("Milan", "Turin", thickness=126)
-arc_diagram.connect("Milan", "Bologna", thickness=201)
-arc_diagram.connect("Rome", "Genoa", thickness=403)
-arc_diagram.connect("Rome", "Florence", thickness=232)
-arc_diagram.connect("Rome", "Naples", thickness=189)
-arc_diagram.connect("Rome", "Bari", thickness=375)
-arc_diagram.connect("Florence", "Genoa", thickness=200)
-arc_diagram.connect("Florence", "Bologna", thickness=80)
-arc_diagram.connect("Naples", "Taranto", thickness=252)
-arc_diagram.connect("Naples", "Bari", thickness=219)
-arc_diagram.connect("Venice", "Verona", thickness=120)
-arc_diagram.connect("Venice", "Bologna", thickness=131)
-arc_diagram.connect("Bolzano", "Verona", thickness=122)
-arc_diagram.connect("Bari", "Taranto", thickness=78)
-arc_diagram.connect("Genoa", "Turin", thickness=122)
+arc_diagram.set_background_color("#262522")
+arc_diagram.connect(
+    "Milan", "Genoa", linewidth=119
+)  # passing the distance in km between the two cities as arc linewidth
+arc_diagram.connect("Milan", "Verona", linewidth=140)
+arc_diagram.connect("Milan", "Turin", linewidth=126)
+arc_diagram.connect("Milan", "Bologna", linewidth=201)
+arc_diagram.connect("Rome", "Genoa", linewidth=403)
+arc_diagram.connect("Rome", "Florence", linewidth=232)
+arc_diagram.connect("Rome", "Naples", linewidth=189)
+arc_diagram.connect("Rome", "Bari", linewidth=375)
+arc_diagram.connect("Florence", "Genoa", linewidth=200)
+arc_diagram.connect("Florence", "Bologna", linewidth=80)
+arc_diagram.connect("Naples", "Taranto", linewidth=252)
+arc_diagram.connect("Naples", "Bari", linewidth=219)
+arc_diagram.connect("Venice", "Verona", linewidth=120)
+arc_diagram.connect("Venice", "Bologna", linewidth=131)
+arc_diagram.connect("Bolzano", "Verona", linewidth=122)
+arc_diagram.connect("Bari", "Taranto", linewidth=78)
+arc_diagram.connect("Genoa", "Turin", linewidth=122)
 arc_diagram.save_plot_as("italian-railway.png")
 # arc_diagram.show_plot()
