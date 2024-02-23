@@ -10,8 +10,9 @@ class ArcDiagram:
         self.nodes = nodes
         self.title = title
         self.arc_coordinates = []
-        self.colors = plt.cm.copper(np.linspace(0, 1, len(nodes)))
+        self.colors = plt.cm.viridis(np.linspace(0, 1, len(nodes)))
         self.background_color = "white"
+        self.__label_rotation_degree = 0
 
     def connect(self, start_node, end_node, linewidth=0.1, arc_position="above"):
         start = self.nodes.index(start_node)
@@ -43,6 +44,9 @@ class ArcDiagram:
     def set_custom_colors(self, color_list):
         self.colors = ListedColormap(color_list).colors
 
+    def set_label_rotation_degree(self, degree):
+        self.__label_rotation_degree = degree
+
     def show_plot(self):
         fig, ax = self.__plot()
         plt.show()
@@ -68,7 +72,7 @@ class ArcDiagram:
                 linewidth=self._map_to_linewidth(raw_linewidth, max_value),
             )
 
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=self.__label_rotation_degree)
         ax.set_xticks(node_positions)
         ax.set_xticklabels(self.nodes)
         ax.set_yticks([])
