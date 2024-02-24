@@ -66,55 +66,100 @@ arc_diagram.connect("Genoa", "Turin", linewidth=122)
 arc_diagram.show_plot()
 ```
 
-![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/the-office.png)
+![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/painters.png)
+
+```py
+title = "Friendships Between Post-, Neo- and Impressionist Painters"
+nodes = [
+    "Vincent van Gogh",
+    "Paul Gauguin",
+    "Eugène Boch",
+    "Émile Bernard",
+    "Louis Anquetin",
+    "Henri de Toulouse-Lautrec",
+    "Paul Cézanne",
+    "Paul Signac",
+    "Georges Seurat",
+    "Camille Pissarro",
+    "Edgar Degas",
+    "Édouard Manet",
+    "Claude Monet",
+    "Pierre-Auguste Renoir",
+]
+
+connections = [
+    ("Vincent van Gogh", "Paul Gauguin"),
+    ("Vincent van Gogh", "Émile Bernard"),
+    ("Vincent van Gogh", "Eugène Boch"),
+    ("Vincent van Gogh", "Paul Signac"),
+    ("Vincent van Gogh", "Henri de Toulouse-Lautrec"),
+    ("Vincent van Gogh", "Louis Anquetin"),
+    ("Vincent van Gogh", "Paul Cézanne"),
+    ("Paul Gauguin", "Émile Bernard"),
+    ("Paul Gauguin", "Eugène Boch"),
+    ("Émile Bernard", "Eugène Boch"),
+    ("Émile Bernard", "Henri de Toulouse-Lautrec"),
+    ("Émile Bernard", "Louis Anquetin"),
+    ("Émile Bernard", "Paul Cézanne"),
+    ("Henri de Toulouse-Lautrec", "Louis Anquetin"),
+    ("Henri de Toulouse-Lautrec", "Paul Signac"),
+    ("Paul Signac", "Georges Seurat"),
+    ("Paul Signac", "Camille Pissarro"),
+    ("Camille Pissarro", "Paul Cézanne"),
+    ("Camille Pissarro", "Paul Gauguin"),
+    ("Camille Pissarro", "Vincent van Gogh"),
+    ("Camille Pissarro", "Georges Seurat"),
+    ("Camille Pissarro", "Paul Signac"),
+    ("Camille Pissarro", "Édouard Manet"),
+    ("Camille Pissarro", "Claude Monet"),
+    ("Camille Pissarro", "Pierre-Auguste Renoir"),
+    ("Camille Pissarro", "Edgar Degas"),
+    ("Claude Monet", "Paul Signac"),
+    ("Claude Monet", "Pierre-Auguste Renoir"),
+    ("Claude Monet", "Édouard Manet"),
+    ("Édouard Manet", "Pierre-Auguste Renoir"),
+    ("Édouard Manet", "Edgar Degas"),
+]
+arc_diagram_painters = ArcDiagram(nodes, title)
+
+arc_diagram_painters.set_label_rotation_degree(80)
+arc_diagram_painters.set_legend_labels(
+    ["Post-Impressionist", "Neo-Impressionist", "Impressionist"]
+)
+
+for connection in connections:
+    arc_diagram_painters.connect(connection[0], connection[1])
+
+arc_diagram_painters.set_background_color("black")
+arc_diagram_painters.set_color_map("summer")
+arc_diagram_painters.save_plot_as("painters.png")
+```
+
+![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/back_to_the_future.png)
+
 
 ```py
 nodes = [
-    "Angela",
-    "Pam",
-    "Karen",
-    "Holly",
-    "Kelly",
-    "Jan",
-    "Michael",
-    "Jim",
-    "Andy",
-    "Roy",
-    "Ryan",
-    "Darrel",
-    "Dwight",
+    "1885",
+    "1955",
+    "1985",
+    "1985A",
+    "2015",
 ]
-title = "The Office relationships"
+
+title = "Back To The Future Time Travels \n Top: Back To The Future \n Bottom: Back To The Past"
 arc_diagram = ArcDiagram(nodes, title)
-arc_diagram.set_color_map("Pastel2")
-arc_diagram.set_background_color("black")
-arc_diagram.connect("Pam", "Jim")
-arc_diagram.connect("Pam", "Roy")
-arc_diagram.connect("Michael", "Holly")
-arc_diagram.connect("Michael", "Jan")
-arc_diagram.connect("Karen", "Jim")
-arc_diagram.connect("Kelly", "Ryan")
-arc_diagram.connect("Kelly", "Darrel")
-arc_diagram.connect("Angela", "Dwight")
-arc_diagram.connect("Angela", "Andy")
-arc_diagram.connect("Jim", "Roy", arc_position="below")
-arc_diagram.connect("Jim", "Dwight", arc_position="below")
-arc_diagram.connect("Andy", "Dwight", arc_position="below")
-arc_diagram.save_plot_as("the-office.png", resolution="300") # resolution is optional, defaults to 'figure'
-```
-
-![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/the-good.png)
-
-
-```py
-nodes = ["The Good", "The Bad", "The Ugly"]
-title = "Characters pointing guns at each other in Sergio Leone's film"
-arc_diagram = ArcDiagram(nodes, title)
-arc_diagram.set_background_color("#c7a27d")
-arc_diagram.connect("The Good", "The Bad")
-arc_diagram.connect("The Good", "The Ugly")
-arc_diagram.connect("The Ugly", "The Bad")
-arc_diagram.show_plot()
+arc_diagram.set_background_color("#222124")
+arc_diagram.set_color_map("autumn")
+arc_diagram.connect("1885", "1985")
+arc_diagram.connect("1955", "1985")
+arc_diagram.connect("1985", "2015")
+arc_diagram.connect("2015", "1985A", arc_position="below")
+arc_diagram.connect("2015", "1955", arc_position="below")
+arc_diagram.connect("1985", "1955", arc_position="below")
+arc_diagram.connect("1985A", "1955", arc_position="below")
+arc_diagram.connect("1955", "1885", arc_position="below")
+arc_diagram.save_plot_as("back_to_the_future.png")
 ```
 
 ## function list
@@ -125,6 +170,8 @@ ArcDiagram(nodes, title) # for initializing an ArcDiagram the entities to connec
 .set_color_map(string) # for setting color map, choose from: https://matplotlib.org/stable/users/explain/colors/colormaps.html
 .set_custom_colors(color_list) # for setting colors of nodes from a custom color list, 
 # the length of the color list must be the same as the length of the node list.
+.set_label_rotation_degree(45) # rotates the labels in 45 degree, default is 0.
+.set_legend_labels(list_of_labels) # adds a legend to the plot with configurable labels.
 .connect(start, end, linewidth=100, arc_position="below") # for creating an arc between two entities
 # optional parameter linewidth sets linewidth proportionally to other arc linewidths.
 # arc_position="below" draws arc below the x axis, default is "above". 

@@ -1,47 +1,5 @@
 from arcplot import ArcDiagram
 
-nodes = ["The Good", "The Bad", "The Ugly"]
-title = "Characters pointing guns at each other in Sergio Leone's film"
-arc_diagram = ArcDiagram(nodes, title)
-arc_diagram.set_background_color("#c7a27d")
-arc_diagram.connect("The Good", "The Bad")
-arc_diagram.connect("The Good", "The Ugly")
-arc_diagram.connect("The Bad", "The Ugly")
-arc_diagram.save_plot_as("the-good.png")
-
-nodes = [
-    "Angela",
-    "Pam",
-    "Karen",
-    "Holly",
-    "Kelly",
-    "Jan",
-    "Michael",
-    "Jim",
-    "Andy",
-    "Roy",
-    "Ryan",
-    "Darrel",
-    "Dwight",
-]
-title = "The Office relationships"
-arc_diagram = ArcDiagram(nodes, title)
-arc_diagram.set_color_map("Pastel2")
-arc_diagram.set_background_color("black")
-arc_diagram.connect("Pam", "Jim")
-arc_diagram.connect("Pam", "Roy")
-arc_diagram.connect("Michael", "Holly")
-arc_diagram.connect("Michael", "Jan")
-arc_diagram.connect("Karen", "Jim")
-arc_diagram.connect("Kelly", "Ryan")
-arc_diagram.connect("Kelly", "Darrel")
-arc_diagram.connect("Angela", "Dwight")
-arc_diagram.connect("Angela", "Andy")
-arc_diagram.connect("Jim", "Roy", arc_position="below")
-arc_diagram.connect("Jim", "Dwight", arc_position="below")
-arc_diagram.connect("Andy", "Dwight", arc_position="below")
-arc_diagram.save_plot_as("the-office.png")
-
 nodes = [
     "Rome",
     "Naples",
@@ -74,6 +32,8 @@ custom_colors = [
 ]
 arc_diagram.set_custom_colors(custom_colors)
 arc_diagram.set_background_color("#262522")
+arc_diagram.set_label_rotation_degree(45)
+
 arc_diagram.connect(
     "Milan", "Genoa", linewidth=119
 )  # passing the distance in km between the two cities as arc linewidth
@@ -93,7 +53,7 @@ arc_diagram.connect("Venice", "Bologna", linewidth=131)
 arc_diagram.connect("Bolzano", "Verona", linewidth=122)
 arc_diagram.connect("Bari", "Taranto", linewidth=78)
 arc_diagram.connect("Genoa", "Turin", linewidth=122)
-arc_diagram.save_plot_as("italian-railway.png")
+arc_diagram.save_plot_as("./img/italian-railway-connections.png")
 
 nodes = [
     "1885",
@@ -103,10 +63,10 @@ nodes = [
     "2015",
 ]
 
-title = "Back To The Future time travels - top: back to the future, bottom: back to the past"
+title = "Back To The Future Time Travels \n Top: Back To The Future \n Bottom: Back To The Past"
 arc_diagram = ArcDiagram(nodes, title)
 arc_diagram.set_background_color("#222124")
-arc_diagram.set_color_map("PuOr")
+arc_diagram.set_color_map("autumn")
 arc_diagram.connect("1885", "1985")
 arc_diagram.connect("1955", "1985")
 arc_diagram.connect("1985", "2015")
@@ -115,45 +75,9 @@ arc_diagram.connect("2015", "1955", arc_position="below")
 arc_diagram.connect("1985", "1955", arc_position="below")
 arc_diagram.connect("1985A", "1955", arc_position="below")
 arc_diagram.connect("1955", "1885", arc_position="below")
-arc_diagram.save_plot_as("back_to_the_future.png")
+arc_diagram.save_plot_as("./img/back_to_the_future.png")
 
-# nodes_collaboration = [
-#     'Albert Einstein', 'Mileva Marić', 'Niels Bohr', 'Max Planck', 'David Hilbert',
-#     'J. Robert Oppenheimer', 'Enrico Fermi', 'Hans Bethe', 'Leo Szilard', 'Edward Teller','Marie Curie',
-# ]
-
-# title = 'Collaborations Between Physicists'
-
-# arc_diagram_scientists = ArcDiagram(nodes_collaboration, title)
-# # arc_diagram_scientists.set_color_map('plasma')
-# # arc_diagram_scientists.set_background_color('lightgray')
-# arc_diagram_scientists.set_label_rotation_degree(90)
-
-# connections_collaboration = [
-#     (0, 1), (0, 2), (0, 3), (0, 4),  # Einstein's collaborations
-#     (5, 6), (6, 7), (7, 5), (5, 8), (5, 9), # Oppenheimer's collaborations
-#     (0, 10), (0, 8),  # Einstein's letters to Curie and Szilard
-# ]
-
-# for node1, node2 in connections_collaboration:
-#     arc_diagram_scientists.connect(nodes_collaboration[node1], nodes_collaboration[node2])
-
-# # # Connect nodes based on correspondences
-# # arc_diagram_scientists.connect("Albert Einstein", "Leo Szilard")
-# # arc_diagram_scientists.connect("Leo Szilard", "J. Robert Oppenheimer")
-# # arc_diagram_scientists.connect("J. Robert Oppenheimer", "Niels Bohr")
-# # arc_diagram_scientists.connect("Niels Bohr", "Werner Heisenberg")
-# # arc_diagram_scientists.connect("Werner Heisenberg", "Erwin Schrödinger")
-# # arc_diagram_scientists.connect("Erwin Schrödinger", "Max Planck")
-# # arc_diagram_scientists.connect("Max Planck", "Enrico Fermi")
-# # arc_diagram_scientists.connect("Enrico Fermi", "Richard Feynman")
-# # arc_diagram_scientists.connect("Richard Feynman", "Marie Curie")
-# # arc_diagram_scientists.connect("Marie Curie", "Albert Einstein")
-
-# arc_diagram_scientists.show_plot()
-
-
-title = "Friendships Between Impressionist, Post-Impressionist and Neo-Impressionist Painters"
+title = "Friendships Between Post-, Neo- and Impressionist Painters"
 nodes = [
     "Vincent van Gogh",
     "Paul Gauguin",
@@ -171,68 +95,49 @@ nodes = [
     "Pierre-Auguste Renoir",
 ]
 
+connections = [
+    ("Vincent van Gogh", "Paul Gauguin"),
+    ("Vincent van Gogh", "Émile Bernard"),
+    ("Vincent van Gogh", "Eugène Boch"),
+    ("Vincent van Gogh", "Paul Signac"),
+    ("Vincent van Gogh", "Henri de Toulouse-Lautrec"),
+    ("Vincent van Gogh", "Louis Anquetin"),
+    ("Vincent van Gogh", "Paul Cézanne"),
+    ("Paul Gauguin", "Émile Bernard"),
+    ("Paul Gauguin", "Eugène Boch"),
+    ("Émile Bernard", "Eugène Boch"),
+    ("Émile Bernard", "Henri de Toulouse-Lautrec"),
+    ("Émile Bernard", "Louis Anquetin"),
+    ("Émile Bernard", "Paul Cézanne"),
+    ("Henri de Toulouse-Lautrec", "Louis Anquetin"),
+    ("Henri de Toulouse-Lautrec", "Paul Signac"),
+    ("Paul Signac", "Georges Seurat"),
+    ("Paul Signac", "Camille Pissarro"),
+    ("Camille Pissarro", "Paul Cézanne"),
+    ("Camille Pissarro", "Paul Gauguin"),
+    ("Camille Pissarro", "Vincent van Gogh"),
+    ("Camille Pissarro", "Georges Seurat"),
+    ("Camille Pissarro", "Paul Signac"),
+    ("Camille Pissarro", "Édouard Manet"),
+    ("Camille Pissarro", "Claude Monet"),
+    ("Camille Pissarro", "Pierre-Auguste Renoir"),
+    ("Camille Pissarro", "Edgar Degas"),
+    ("Claude Monet", "Paul Signac"),
+    ("Claude Monet", "Pierre-Auguste Renoir"),
+    ("Claude Monet", "Édouard Manet"),
+    ("Édouard Manet", "Pierre-Auguste Renoir"),
+    ("Édouard Manet", "Edgar Degas"),
+]
 arc_diagram_painters = ArcDiagram(nodes, title)
 
-arc_diagram_painters.set_label_rotation_degree(90)
+arc_diagram_painters.set_label_rotation_degree(80)
+arc_diagram_painters.set_legend_labels(
+    ["Post-Impressionist", "Neo-Impressionist", "Impressionist"]
+)
 
-# arc_diagram_painters.connect("Vincent van Gogh", "Paul Gauguin")
-# arc_diagram_painters.connect("Vincent van Gogh", "Émile Bernard")
-# arc_diagram_painters.connect("Vincent van Gogh", "John Peter Russell")
-# arc_diagram_painters.connect("Vincent van Gogh", "Henri de Toulouse-Lautrec")
-# arc_diagram_painters.connect("Vincent van Gogh", "Paul Signac")
-# arc_diagram_painters.connect("Vincent van Gogh", "Georges Seurat")
-# arc_diagram_painters.connect("Vincent van Gogh", "Camille Pissarro")
-# arc_diagram_painters.connect("Vincent van Gogh", "Paul Cézanne")
-# arc_diagram_painters.connect("Vincent van Gogh", "Édouard Manet")
-# arc_diagram_painters.connect("Vincent van Gogh", "Claude Monet")
-# arc_diagram_painters.connect("Vincent van Gogh", "Pierre-Auguste Renoir")
-
-# the four of the major Post-Impressionists: Cézanne, Seurat, Gauguin, and van Gogh.
-arc_diagram_painters.connect("Vincent van Gogh", "Paul Gauguin")
-arc_diagram_painters.connect("Vincent van Gogh", "Émile Bernard")
-arc_diagram_painters.connect("Vincent van Gogh", "Eugène Boch")
-arc_diagram_painters.connect("Vincent van Gogh", "Paul Signac")
-# arc_diagram_painters.connect("Vincent van Gogh", "Camille Pissarro")
-arc_diagram_painters.connect("Vincent van Gogh", "Henri de Toulouse-Lautrec")
-arc_diagram_painters.connect("Vincent van Gogh", "Louis Anquetin")
-arc_diagram_painters.connect("Vincent van Gogh", "Paul Cézanne")
-
-arc_diagram_painters.connect("Paul Gauguin", "Émile Bernard")
-# arc_diagram_painters.connect("Paul Gauguin", "Camille Pissarro")
-arc_diagram_painters.connect("Paul Gauguin", "Eugène Boch")
-
-arc_diagram_painters.connect("Émile Bernard", "Eugène Boch")
-arc_diagram_painters.connect("Émile Bernard", "Henri de Toulouse-Lautrec")
-arc_diagram_painters.connect("Émile Bernard", "Louis Anquetin")
-arc_diagram_painters.connect("Émile Bernard", "Paul Cézanne")
-
-arc_diagram_painters.connect("Henri de Toulouse-Lautrec", "Louis Anquetin")
-arc_diagram_painters.connect("Henri de Toulouse-Lautrec", "Paul Signac")
-
-arc_diagram_painters.connect("Paul Signac", "Georges Seurat")
-arc_diagram_painters.connect("Paul Signac", "Camille Pissarro")
-# arc_diagram_painters.connect("Paul Signac", "Claude Monet")
-
-arc_diagram_painters.connect("Camille Pissarro", "Paul Cézanne")
-arc_diagram_painters.connect("Camille Pissarro", "Paul Gauguin")
-arc_diagram_painters.connect("Camille Pissarro", "Vincent van Gogh")
-arc_diagram_painters.connect("Camille Pissarro", "Georges Seurat")
-arc_diagram_painters.connect("Camille Pissarro", "Paul Signac")
-arc_diagram_painters.connect("Camille Pissarro", "Édouard Manet")
-arc_diagram_painters.connect("Camille Pissarro", "Claude Monet")
-arc_diagram_painters.connect("Camille Pissarro", "Pierre-Auguste Renoir")
-arc_diagram_painters.connect("Camille Pissarro", "Edgar Degas")
-
-arc_diagram_painters.connect("Claude Monet", "Paul Signac")
-arc_diagram_painters.connect("Claude Monet", "Pierre-Auguste Renoir")
-arc_diagram_painters.connect("Claude Monet", "Édouard Manet")
-
-arc_diagram_painters.connect("Édouard Manet", "Pierre-Auguste Renoir")
-arc_diagram_painters.connect("Édouard Manet", "Edgar Degas")
+for connection in connections:
+    arc_diagram_painters.connect(connection[0], connection[1])
 
 arc_diagram_painters.set_background_color("black")
-# arc_diagram_painters.set_color_map("PuOr")
-# arc_diagram_painters.set_color_map("Wistia")
 arc_diagram_painters.set_color_map("summer")
-
-arc_diagram_painters.save_plot_as("painters.png")
+arc_diagram_painters.save_plot_as("./img/painters.png")
