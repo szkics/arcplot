@@ -64,18 +64,18 @@ nodes = [
 ]
 
 title = "Back To The Future Time Travels \n Top: Back To The Future \n Bottom: Back To The Past"
-arc_diagram = ArcDiagram(nodes, title)
-arc_diagram.set_background_color("#222124")
-arc_diagram.set_color_map("autumn")
-arc_diagram.connect("1885", "1985")
-arc_diagram.connect("1955", "1985")
-arc_diagram.connect("1985", "2015")
-arc_diagram.connect("2015", "1985A", arc_position="below")
-arc_diagram.connect("2015", "1955", arc_position="below")
-arc_diagram.connect("1985", "1955", arc_position="below")
-arc_diagram.connect("1985A", "1955", arc_position="below")
-arc_diagram.connect("1955", "1885", arc_position="below")
-arc_diagram.save_plot_as("./img/back_to_the_future.png")
+time_travels = ArcDiagram(nodes, title)
+time_travels.set_background_color("#222124")
+time_travels.set_color_map("autumn")
+time_travels.connect("1885", "1985")
+time_travels.connect("1955", "1985")
+time_travels.connect("1985", "2015")
+time_travels.connect("2015", "1985A", arc_position="below")
+time_travels.connect("2015", "1955", arc_position="below")
+time_travels.connect("1985", "1955", arc_position="below")
+time_travels.connect("1985A", "1955", arc_position="below")
+time_travels.connect("1955", "1885", arc_position="below")
+time_travels.save_plot_as("./img/back_to_the_future.png")
 
 title = "Friendships Between Post-, Neo- and Impressionist Painters"
 nodes = [
@@ -128,16 +128,16 @@ connections = [
     ("Édouard Manet", "Pierre-Auguste Renoir"),
     ("Édouard Manet", "Edgar Degas"),
 ]
-arc_diagram_painters = ArcDiagram(nodes, title)
+impressionist_painters = ArcDiagram(nodes, title)
 
-arc_diagram_painters.set_label_rotation_degree(80)
-arc_diagram_painters.set_legend_labels(
+impressionist_painters.set_label_rotation_degree(80)
+impressionist_painters.set_legend_labels(
     ["Post-Impressionist", "Neo-Impressionist", "Impressionist"]
 )
 
 for connection in connections:
-    arc_diagram_painters.connect(connection[0], connection[1])
+    impressionist_painters.connect(connection[0], connection[1])
 
-arc_diagram_painters.set_background_color("black")
-arc_diagram_painters.set_color_map("summer")
-arc_diagram_painters.save_plot_as("./img/painters.png")
+impressionist_painters.set_background_color("black")
+impressionist_painters.set_color_map("summer")
+impressionist_painters.save_plot_as("./img/painters.png")

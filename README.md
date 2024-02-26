@@ -2,8 +2,10 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/szkics/arcplot/blob/main/LICENSE)
 [![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/downloads/release)
+[![Downloads](https://static.pepy.tech/badge/Arcplot)](https://pepy.tech/project/Arcplot)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/szkics/arcplot)
 
-[arcplot](https://pypi.org/project/arcplot/) is a library based on matplotlib for seamless creation of arc diagrams.
+[arcplot](https://pypi.org/project/arcplot/) is a library based on matplotlib for seamless creation of custom arc diagrams.
 
 ## usage
 
@@ -44,6 +46,7 @@ custom_colors = [
 ]
 arc_diagram.set_custom_colors(custom_colors)
 arc_diagram.set_background_color("#262522")
+arc_diagram.set_label_rotation_degree(45)
 arc_diagram.connect(
     "Milan", "Genoa", linewidth=119
 )  # passing the distance in km between the two cities as arc linewidth
@@ -182,5 +185,5 @@ ArcDiagram(nodes, title) # for initializing an ArcDiagram the entities to connec
 ## installation
 
 ```bash
-pip install arcplot
+pip install arcplot==0.1.3
 ```

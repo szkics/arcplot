@@ -6,11 +6,17 @@ from operator import itemgetter
 
 
 class ArcDiagram:
-    def __init__(self, nodes, title):
-        self.__nodes = nodes
-        self.__title = title
+
+    def __init__(self, *args):
+
+        if len(args) != 2:
+            self.help()
+            raise ValueError("ArcDiagram(node_list, title_string) takes 2 arguments.")
+
+        self.__nodes = args[0]
+        self.__title = args[1]
         self.__arc_coordinates = []
-        self.__colors = plt.cm.viridis(np.linspace(0, 1, len(nodes)))
+        self.__colors = plt.cm.viridis(np.linspace(0, 1, len(self.__nodes)))
         self.__background_color = "white"
         self.__label_rotation_degree = 0
         self.__legend_labels = []
@@ -30,6 +36,20 @@ class ArcDiagram:
         x = arc_center + radius * np.cos(np.radians(theta))
         y = radius * np.sin(np.radians(theta))
         self.__arc_coordinates.append((x, y, start, linewidth))
+
+    def help(self):
+        function_list = """
+        ArcDiagram(node_list, title_string)
+        .set_background_color(string)
+        .set_color_map(string)
+        .set_custom_colors(color_list)
+        .set_label_rotation_degree(arc_degree)
+        .set_legend_labels(list_of_labels)
+        .connect(start, end, linewidth=100, arc_position="below")
+        .show_plot()
+        .save_plot_as(file_name, resolution="100")
+        """
+        print(function_list)
 
     def set_background_color(self, color):
         self.__background_color = color
