@@ -180,10 +180,11 @@ ArcDiagram(nodes, title) # for initializing an ArcDiagram the entities to connec
 # arc_position="below" draws arc below the x axis, default is "above". 
 .show_plot() # for checking the results of the data visualization process.
 .save_plot_as(file_name, resolution="100") # for saving file as an image with an optional resolution setting for higher-quality images.
+.help() # to get function list.
 ```
 
 ## installation
 
 ```bash
-pip install arcplot==0.1.3
+pip install arcplot==0.1.4
 ```
