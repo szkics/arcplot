@@ -139,8 +139,7 @@ class ArcDiagram:
         else:
             return (10 * value) / max_value
 
-
-def fast_arc_diagram(
+def create_arc_plot(
     df: pd.DataFrame,
     start_node: str,
     end_node: str,
@@ -171,14 +170,6 @@ def fast_arc_diagram(
         ValueError: If weights is not a column in the dataframe.
     """
 
-    # check if ArcDiagram is installed
-    try:
-        from arcplot import ArcDiagram
-    except:
-        raise ImportError(
-            "ArcDiagram is not installed. Please install it using pip install arcplot"
-        )
-
     data = df.copy()
 
     if start_node not in data.columns or end_node not in data.columns:
@@ -204,13 +195,13 @@ def fast_arc_diagram(
                 raise ValueError("positions must have 1 or 2 unique values")
             else:
                 if n_positions == 1:
-                    posMap = {data[positions].unique()[0]: "above"}
+                    position_map = {data[positions].unique()[0]: "above"}
                 else:
-                    posMap = {
+                    position_map = {
                         data[positions].unique()[0]: "above",
                         data[positions].unique()[1]: "below",
                     }
-                data[positions] = data[positions].map(posMap)
+                data[positions] = data[positions].map(position_map)
 
                 if invert_positions:
                     data[positions] = data[positions].map(
@@ -239,5 +230,57 @@ def fast_arc_diagram(
     arcdiag.set_background_color(bg_color)
     arcdiag.set_color_map(cmap)
 
+    return arcdiag
+
+def show_arc_plot(
+    df: pd.DataFrame,
+    start_node: str,
+    end_node: str,
+    weights=None,
+    positions=None,
+    invert_positions: bool = False,
+    bg_color="white",
+    cmap="viridis",
+    title="My Diagram",
+):
+    arc_diagram = create_arc_plot(
+        df,
+        start_node,
+        end_node,
+        weights,
+        positions,
+        invert_positions,
+        bg_color,
+        cmap,
+        title,
+    )
+
     # plot the diagram
-    arcdiag.show_plot()
+    arc_diagram.show_plot()
+
+def save_arc_plot_as(
+    df: pd.DataFrame,
+    start_node: str,
+    end_node: str,
+    file_name: str,
+    weights=None,
+    positions=None,
+    invert_positions: bool = False,
+    bg_color="white",
+    cmap="viridis",
+    title="My Diagram",
+    resolution="figure"
+):
+    arc_diagram = create_arc_plot(
+        df,
+        start_node,
+        end_node,
+        weights,
+        positions,
+        invert_positions,
+        bg_color,
+        cmap,
+        title,
+    )
+
+    arc_diagram.save_plot_as(file_name, resolution)

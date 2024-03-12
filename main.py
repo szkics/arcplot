@@ -1,4 +1,19 @@
-from arcplot import ArcDiagram
+from arcplot import ArcDiagram, show_arc_plot, save_arc_plot_as
+import pandas as pd
+
+df = pd.read_csv("./data/connections-dataset.csv")
+show_arc_plot(
+    df, start_node="from", end_node="to", weights="weights", positions="position"
+)
+save_arc_plot_as(
+    df,
+    start_node="from",
+    end_node="to",
+    weights="weights",
+    positions="position",
+    title="Connections",
+    file_name="./img/connections.png",
+)
 
 nodes = [
     "Rome",

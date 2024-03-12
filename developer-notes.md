@@ -5,6 +5,12 @@ pip install -r requirements.txt
 ```
 
 ```
+poetry config http-basic.pypi __token__ <your_pypi_token>
+OR
+poetry config pypi-token.pypi <your-api-token>
+```
+
+```
 pip install poetry
 poetry new arcplot # for creating desired package structure
 poetry init # to initialize package
