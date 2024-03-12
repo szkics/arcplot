@@ -2,11 +2,11 @@ import matplotlib.pyplot as plt
 from matplotlib import colormaps
 from matplotlib.colors import ListedColormap
 import numpy as np
+import pandas as pd
 from operator import itemgetter
 
 
 class ArcDiagram:
-
     def __init__(self, *args):
 
         if len(args) != 2:
@@ -138,3 +138,106 @@ class ArcDiagram:
             return 1
         else:
             return (10 * value) / max_value
+
+
+def fast_arc_diagram(
+    df: pd.DataFrame,
+    start_node: str,
+    end_node: str,
+    weights=None,
+    positions=None,
+    invert_positions: bool = False,
+    bg_color="white",
+    cmap="viridis",
+    title="My Diagram",
+):
+    """
+    Wrapper for the ArcDiagram class, which creates diagrams from a pandas dataframe.
+    Args:
+        df (pd.DataFrame): The dataframe containing the data.
+        start_node (str): The name of the column containing the start node.
+        end_node (str): The name of the column containing the end node.
+        weights (str, optional): The name of the column containing the weights. Defaults to None.
+        positions (str, optional): The name of the column containing the positions. Defaults to None.
+        invert_positions (bool, optional): Whether to invert the positions. Defaults to False.
+        bg_color (str, optional): The background color. Defaults to 'white'.
+        cmap (str, optional): The color map. Defaults to 'viridis'.
+        title (str, optional): The title of the diagram. Defaults to 'My Diagram'.
+    Raises:
+        ValueError: If start_node or end_node are not columns in the dataframe.
+        ValueError: If start_node and end_node do not have the same length.
+        ValueError: If positions is not a column in the dataframe.
+        ValueError: If positions does not have 1 or 2 unique values.
+        ValueError: If weights is not a column in the dataframe.
+    """
+
+    # check if ArcDiagram is installed
+    try:
+        from arcplot import ArcDiagram
+    except:
+        raise ImportError(
+            "ArcDiagram is not installed. Please install it using pip install arcplot"
+        )
+
+    data = df.copy()
+
+    if start_node not in data.columns or end_node not in data.columns:
+        raise ValueError("start_node and end_node must be columns in the dataframe")
+
+    if len(data[start_node]) != len(data[end_node]):
+        raise ValueError("start_node and end_node must have the same length")
+
+    # get all unique nodes
+    nodes = data[start_node].unique().tolist() + data[end_node].unique().tolist()
+    nodes = list(set(nodes))
+
+    # initialize the diagram
+    arcdiag = ArcDiagram(nodes, title)
+
+    # get positions
+    if positions:
+        if positions not in data.columns:
+            raise ValueError("positions must be a column in the dataframe")
+        else:
+            n_positions = data[positions].nunique()
+            if n_positions not in [1, 2]:
+                raise ValueError("positions must have 1 or 2 unique values")
+            else:
+                if n_positions == 1:
+                    posMap = {data[positions].unique()[0]: "above"}
+                else:
+                    posMap = {
+                        data[positions].unique()[0]: "above",
+                        data[positions].unique()[1]: "below",
+                    }
+                data[positions] = data[positions].map(posMap)
+
+                if invert_positions:
+                    data[positions] = data[positions].map(
+                        {"below": "above", "above": "below"}
+                    )
+    else:
+        data[positions] = "above"
+
+    # get weights
+    if not weights:
+        data[weights] = 0.1
+    else:
+        if weights not in data.columns:
+            raise ValueError("weights must be a column in the dataframe")
+
+    # connect the nodes
+    for connection in data.iterrows():
+        arcdiag.connect(
+            connection[1][start_node],
+            connection[1][end_node],
+            linewidth=connection[1][weights],
+            arc_position=connection[1][positions],
+        )
+
+    # custom colors
+    arcdiag.set_background_color(bg_color)
+    arcdiag.set_color_map(cmap)
+
+    # plot the diagram
+    arcdiag.show_plot()
