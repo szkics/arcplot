@@ -7,6 +7,8 @@
 
 [arcplot](https://pypi.org/project/arcplot/) is a library based on matplotlib for seamless creation of custom arc diagrams.
 
+arcplot is also presented in [Python Graph Gallery](https://python-graph-gallery.com/)'s [Arc diagram](https://python-graph-gallery.com/arc-diagram/) section. huge thanks for this to [Yan Holtz](https://github.com/holtzy) and [Joseph Barbier](https://github.com/JosephBARBIERDARNAL)!
+
 ## usage
 
 ![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/italian-railway-connections.png)
