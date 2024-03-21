@@ -11,6 +11,8 @@ arcplot is also presented in [Python Graph Gallery](https://python-graph-gallery
 
 ## usage
 
+### custom colors
+
 ![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/italian-railway-connections.png)
 
 ```py
@@ -70,6 +72,8 @@ arc_diagram.connect("Bari", "Taranto", linewidth=78)
 arc_diagram.connect("Genoa", "Turin", linewidth=122)
 arc_diagram.show_plot()
 ```
+
+### custom line widths
 
 ![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/painters.png)
 
@@ -140,6 +144,8 @@ arc_diagram_painters.set_color_map("summer")
 arc_diagram_painters.save_plot_as("painters.png")
 ```
 
+### custom arc positions
+
 ![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/back_to_the_future.png)
 
 
@@ -167,9 +173,33 @@ arc_diagram.connect("1955", "1885", arc_position="below")
 arc_diagram.save_plot_as("back_to_the_future.png")
 ```
 
+### wrapper around ArcDiagram which uses pandas DataFrame
+
+![alt text](https://raw.githubusercontent.com/szkics/arcplot/main/img/connections.png)
+
+```py
+from arcplot import show_arc_plot, save_arc_plot_as
+import pandas as pd
+
+df = pd.read_csv("./data/connections-dataset.csv")
+show_arc_plot(
+    df, start_node="from", end_node="to", weights="weights", positions="position"
+)
+save_arc_plot_as(
+    df,
+    start_node="from",
+    end_node="to",
+    weights="weights",
+    positions="position",
+    title="Connections",
+    file_name="./img/connections.png",
+)
+```
+
 ## function list
 
 ```py
+### ArcDiagram class methods
 ArcDiagram(nodes, title) # for initializing an ArcDiagram the entities to connect and the title is required.
 .set_background_color(string) # for setting background color of the matplotlib figure.
 .set_color_map(string) # for setting color map, choose from: https://matplotlib.org/stable/users/explain/colors/colormaps.html
@@ -183,10 +213,50 @@ ArcDiagram(nodes, title) # for initializing an ArcDiagram the entities to connec
 .show_plot() # for checking the results of the data visualization process.
 .save_plot_as(file_name, resolution="100") # for saving file as an image with an optional resolution setting for higher-quality images.
 .help() # to get function list.
+
+### wrapper functions built on ArcDiagram
+
+create_arc_plot(
+    df: pd.DataFrame,
+    start_node: str,
+    end_node: str,
+    weights=None,
+    positions=None,
+    invert_positions: bool = False,
+    bg_color="white",
+    cmap="viridis",
+    title="My Diagram",
+) # returns ArcDiagram
+
+show_arc_plot(
+    df: pd.DataFrame,
+    start_node: str,
+    end_node: str,
+    weights=None,
+    positions=None,
+    invert_positions: bool = False,
+    bg_color="white",
+    cmap="viridis",
+    title="My Diagram",
+) # for checking the results of the data visualization process.
+
+save_arc_plot_as(
+    df: pd.DataFrame,
+    start_node: str,
+    end_node: str,
+    file_name: str,
+    weights=None,
+    positions=None,
+    invert_positions: bool = False,
+    bg_color="white",
+    cmap="viridis",
+    title="My Diagram",
+    resolution="figure"
+) # for saving file as an image with an optional resolution setting for higher-quality images.
 ```
 
 ## installation
 
 ```bash
-pip install arcplot==0.1.4
+pip install arcplot==0.1.5
 ```
