@@ -83,7 +83,7 @@ class ArcDiagram:
         indices = [round(i * step) for i in range(n)]
         return [colors[i] for i in indices]
 
-    def __plot(self,node_size=100,marker_type = 'o',marker_size=10):
+    def __plot(self,node_size=100,marker_type = "o",marker_size=10):
         fig, ax = plt.subplots(figsize=(8, 6))
         ax.set_facecolor(self.__background_color)
 
