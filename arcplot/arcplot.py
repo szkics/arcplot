@@ -83,14 +83,14 @@ class ArcDiagram:
         indices = [round(i * step) for i in range(n)]
         return [colors[i] for i in indices]
 
-    def __plot(self):
+    def __plot(self,node_size=100,marker_type = 'o',marker_size=10):
         fig, ax = plt.subplots(figsize=(8, 6))
         ax.set_facecolor(self.__background_color)
 
         # plot nodes as points
         node_positions = np.arange(len(self.__nodes))
         ax.scatter(
-            node_positions, np.zeros_like(node_positions), color=self.__colors, s=100
+            node_positions, np.zeros_like(node_positions), color=self.__colors, s=node_size
         )
 
         max_value = max(self.__arc_coordinates, key=itemgetter(3))[3]
@@ -120,11 +120,11 @@ class ArcDiagram:
                     plt.Line2D(
                         [0],
                         [0],
-                        marker="o",
+                        marker=marker_type,
                         color="w",
                         label=label,
                         markerfacecolor=label_colors[i],
-                        markersize=10,
+                        markersize=marker_size,
                     )
                     for i, label in enumerate(legend_labels)
                 ],
