@@ -183,7 +183,14 @@ import pandas as pd
 
 df = pd.read_csv("./data/connections-dataset.csv")
 show_arc_plot(
-    df, start_node="from", end_node="to", weights="weights", positions="position"
+    df,
+    start_node="from",
+    end_node="to",
+    weights="weights",
+    positions="position",
+    title="Connections",
+    node_type="^",
+    node_size=300,
 )
 save_arc_plot_as(
     df,
@@ -193,6 +200,8 @@ save_arc_plot_as(
     positions="position",
     title="Connections",
     file_name="./img/connections.png",
+    node_type="^",
+    node_size=300,
 )
 ```
 
@@ -258,5 +267,5 @@ save_arc_plot_as(
 ## installation
 
 ```bash
-pip install arcplot==0.1.5
+pip install arcplot==0.1.6
 ```

@@ -67,12 +67,14 @@ class ArcDiagram:
     def set_legend_labels(self, legend_labels):
         self.__legend_labels = legend_labels
 
-    def save_plot_as(self, file_name, resolution="figure"):
-        fig, ax = self.__plot()
+    def save_plot_as(
+        self, file_name, resolution="figure", node_type="o", node_size=100
+    ):
+        fig, ax = self.__plot(node_type, node_size)
         plt.savefig(file_name, dpi=resolution, bbox_inches="tight")
 
-    def show_plot(self):
-        fig, ax = self.__plot()
+    def show_plot(self, node_type="o", node_size=100):
+        fig, ax = self.__plot(node_type, node_size)
         plt.show()
 
     def __label_color_distribution(self, colors, n):
@@ -83,14 +85,18 @@ class ArcDiagram:
         indices = [round(i * step) for i in range(n)]
         return [colors[i] for i in indices]
 
-    def __plot(self):
+    def __plot(self, node_type="o", node_size=100):
         fig, ax = plt.subplots(figsize=(8, 6))
         ax.set_facecolor(self.__background_color)
 
         # plot nodes as points
         node_positions = np.arange(len(self.__nodes))
         ax.scatter(
-            node_positions, np.zeros_like(node_positions), color=self.__colors, s=100
+            node_positions,
+            np.zeros_like(node_positions),
+            color=self.__colors,
+            marker=node_type,
+            s=node_size,
         )
 
         max_value = max(self.__arc_coordinates, key=itemgetter(3))[3]
@@ -139,6 +145,7 @@ class ArcDiagram:
         else:
             return (10 * value) / max_value
 
+
 def create_arc_plot(
     df: pd.DataFrame,
     start_node: str,
@@ -148,7 +155,7 @@ def create_arc_plot(
     invert_positions: bool = False,
     bg_color="white",
     cmap="viridis",
-    title="My Diagram",
+    title="Diagram",
 ):
     """
     Wrapper for the ArcDiagram class, which creates diagrams from a pandas dataframe.
@@ -161,7 +168,7 @@ def create_arc_plot(
         invert_positions (bool, optional): Whether to invert the positions. Defaults to False.
         bg_color (str, optional): The background color. Defaults to 'white'.
         cmap (str, optional): The color map. Defaults to 'viridis'.
-        title (str, optional): The title of the diagram. Defaults to 'My Diagram'.
+        title (str, optional): The title of the diagram. Defaults to 'Diagram'.
     Raises:
         ValueError: If start_node or end_node are not columns in the dataframe.
         ValueError: If start_node and end_node do not have the same length.
@@ -232,6 +239,7 @@ def create_arc_plot(
 
     return arcdiag
 
+
 def show_arc_plot(
     df: pd.DataFrame,
     start_node: str,
@@ -242,6 +250,8 @@ def show_arc_plot(
     bg_color="white",
     cmap="viridis",
     title="My Diagram",
+    node_type="o",
+    node_size=100,
 ):
     arc_diagram = create_arc_plot(
         df,
@@ -256,7 +266,8 @@ def show_arc_plot(
     )
 
     # plot the diagram
-    arc_diagram.show_plot()
+    arc_diagram.show_plot(node_type, node_size)
+
 
 def save_arc_plot_as(
     df: pd.DataFrame,
@@ -269,7 +280,9 @@ def save_arc_plot_as(
     bg_color="white",
     cmap="viridis",
     title="My Diagram",
-    resolution="figure"
+    resolution="figure",
+    node_type="o",
+    node_size=100,
 ):
     arc_diagram = create_arc_plot(
         df,
@@ -283,4 +296,4 @@ def save_arc_plot_as(
         title,
     )
 
-    arc_diagram.save_plot_as(file_name, resolution)
+    arc_diagram.save_plot_as(file_name, resolution, node_type, node_size)
