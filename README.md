@@ -277,5 +277,5 @@ save_arc_plot_as(
 ## installation
 
 ```bash
-pip install arcplot==0.1.6
+pip install arcplot==1.0.0
 ```
