@@ -76,7 +76,7 @@ class ArcDiagram:
         width=8,
         height=6,
     ):
-        fig, ax = self.__plot(node_type, node_size)
+        fig, ax = self.__plot(node_type, node_size, width, height)
         plt.savefig(file_name, dpi=resolution, bbox_inches="tight")
 
     def show_plot(self, node_type="o", node_size=100, width=8, height=6):

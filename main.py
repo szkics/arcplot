@@ -11,8 +11,8 @@ show_arc_plot(
     title="Connections",
     node_type="^",
     node_size=300,
-    width=12,
-    height=8,
+    width=19.2,
+    height=10.8,
 )
 save_arc_plot_as(
     df,
@@ -25,8 +25,8 @@ save_arc_plot_as(
     node_type="^",
     node_size=300,
     resolution=100,
-    width=19.2,
-    height=10.8,
+    width=12,
+    height=8,
 )
 
 nodes = [
