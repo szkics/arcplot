@@ -46,8 +46,8 @@ class ArcDiagram:
         .set_label_rotation_degree(arc_degree)
         .set_legend_labels(list_of_labels)
         .connect(start, end, linewidth=100, arc_position="below")
-        .show_plot()
-        .save_plot_as(file_name, resolution="100")
+        .show_plot(node_type="o", node_size=100, width=8, height=6)
+        .save_plot_as(file_name, resolution="figure", node_type="o", node_size=100, width=8, height=6)
         """
         print(function_list)
 
@@ -68,13 +68,19 @@ class ArcDiagram:
         self.__legend_labels = legend_labels
 
     def save_plot_as(
-        self, file_name, resolution="figure", node_type="o", node_size=100
+        self,
+        file_name,
+        resolution="figure",
+        node_type="o",
+        node_size=100,
+        width=8,
+        height=6,
     ):
         fig, ax = self.__plot(node_type, node_size)
         plt.savefig(file_name, dpi=resolution, bbox_inches="tight")
 
-    def show_plot(self, node_type="o", node_size=100):
-        fig, ax = self.__plot(node_type, node_size)
+    def show_plot(self, node_type="o", node_size=100, width=8, height=6):
+        fig, ax = self.__plot(node_type, node_size, width, height)
         plt.show()
 
     def __label_color_distribution(self, colors, n):
@@ -85,8 +91,8 @@ class ArcDiagram:
         indices = [round(i * step) for i in range(n)]
         return [colors[i] for i in indices]
 
-    def __plot(self, node_type="o", node_size=100):
-        fig, ax = plt.subplots(figsize=(8, 6))
+    def __plot(self, node_type="o", node_size=100, width=8, height=6):
+        fig, ax = plt.subplots(figsize=(width, height))
         ax.set_facecolor(self.__background_color)
 
         # plot nodes as points
@@ -252,6 +258,8 @@ def show_arc_plot(
     title="My Diagram",
     node_type="o",
     node_size=100,
+    width=8,
+    height=6,
 ):
     arc_diagram = create_arc_plot(
         df,
@@ -266,7 +274,7 @@ def show_arc_plot(
     )
 
     # plot the diagram
-    arc_diagram.show_plot(node_type, node_size)
+    arc_diagram.show_plot(node_type, node_size, width, height)
 
 
 def save_arc_plot_as(
@@ -283,6 +291,8 @@ def save_arc_plot_as(
     resolution="figure",
     node_type="o",
     node_size=100,
+    width=8,
+    height=6,
 ):
     arc_diagram = create_arc_plot(
         df,
@@ -296,4 +306,4 @@ def save_arc_plot_as(
         title,
     )
 
-    arc_diagram.save_plot_as(file_name, resolution, node_type, node_size)
+    arc_diagram.save_plot_as(file_name, resolution, node_type, node_size, width, height)

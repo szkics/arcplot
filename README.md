@@ -191,6 +191,8 @@ show_arc_plot(
     title="Connections",
     node_type="^",
     node_size=300,
+    width=12,
+    height=8,
 )
 save_arc_plot_as(
     df,
@@ -202,6 +204,9 @@ save_arc_plot_as(
     file_name="./img/connections.png",
     node_type="^",
     node_size=300,
+    resolution=100,
+    width=19.2,
+    height=10.8,
 )
 ```
 
@@ -219,8 +224,13 @@ ArcDiagram(nodes, title) # for initializing an ArcDiagram the entities to connec
 .connect(start, end, linewidth=100, arc_position="below") # for creating an arc between two entities
 # optional parameter linewidth sets linewidth proportionally to other arc linewidths.
 # arc_position="below" draws arc below the x axis, default is "above". 
-.show_plot() # for checking the results of the data visualization process.
-.save_plot_as(file_name, resolution="100") # for saving file as an image with an optional resolution setting for higher-quality images.
+.show_plot(node_type="o", node_size=100, width=8, height=6) # for checking the results of the data visualization process.
+.save_plot_as(file_name,
+        resolution="figure",
+        node_type="o",
+        node_size=100,
+        width=8,
+        height=6) # for saving file as an image with an optional resolution setting for higher-quality images.
 .help() # to get function list.
 
 ### wrapper functions built on ArcDiagram
